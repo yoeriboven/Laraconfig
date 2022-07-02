@@ -75,7 +75,7 @@ Laraconfig makes managing user settings globally using a _manifest_ of sorts, th
 ```php
 use DarkGhostHunter\Laraconfig\Facades\Setting;
 
-Setting::name('color')->string();
+Setting::name('color')->string()->model(User::class);;
 ```
 
 ### Creating a setting
@@ -111,6 +111,14 @@ Setting::name('color')->string()->default('black');
 ```
 
 > You can later revert the value back to the default using [`setDefault()`](#defaulting-a-setting).
+
+### The model
+
+Set the model of the setting with the `model` function.
+
+```php
+Setting::name('color')->model(User::class);
+```
 
 ### Enabled or Disabled
 
