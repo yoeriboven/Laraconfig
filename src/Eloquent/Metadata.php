@@ -38,7 +38,7 @@ class Metadata extends Model
      *
      * @var string
      */
-    protected $table = 'user_settings_metadata';
+    protected $table = 'settings_metadata';
 
     /**
      * The attributes that should be cast.

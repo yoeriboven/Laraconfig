@@ -29,7 +29,7 @@ class AddMetadata implements Scope
         // queried, or it will replace the "select all" statement smartly.
         $builder->beforeQuery(static function (QueryBuilder $builder) use ($model): void {
 
-            $builder->join('user_settings_metadata', 'user_settings.metadata_id', 'user_settings_metadata.id');
+            $builder->join('settings_metadata', 'settings.metadata_id', 'settings_metadata.id');
 
             if (empty($builder->columns)) {
                 $builder->select(array_merge([$model->qualifyColumn('*')], static::getColumns()));

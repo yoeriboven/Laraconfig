@@ -27,13 +27,6 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class Setting extends Model
 {
     /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'user_settings';
-
-    /**
      * The attributes that should be cast.
      *
      * @var array
