@@ -4,6 +4,7 @@ namespace DarkGhostHunter\Laraconfig\Registrar;
 
 use Closure;
 use DarkGhostHunter\Laraconfig\Eloquent\Metadata;
+use Illuminate\Database\Eloquent\Model;
 
 class Declaration
 {
@@ -60,6 +61,8 @@ class Declaration
      * @var \Closure|null
      */
     public null|Closure $using = null;
+
+    public ?string $model = null;
 
     /**
      * Declaration constructor.
@@ -237,6 +240,13 @@ class Declaration
         return $this;
     }
 
+    public function model(string $model): static
+    {
+        $this->model = $model;
+
+        return $this;
+    }
+
     /**
      * Transforms the Declaration to a Metadata Model.
      *
@@ -245,6 +255,7 @@ class Declaration
     public function toMetadata(): Metadata
     {
         return (new Metadata)->forceFill([
+            'model'         => $this->model,
             'name'          => $this->name,
             'type'          => $this->type,
             'default'       => $this->default,
