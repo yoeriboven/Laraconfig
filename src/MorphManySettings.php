@@ -124,7 +124,7 @@ class MorphManySettings extends MorphMany
         $this->cache?->invalidate();
 
         // Add the collection to the relation, avoiding retrieving them again later.
-        $this->getParent()->setRelation('settings', $settings = new SettingsCollection());
+        $settings = new SettingsCollection();
 
         foreach (Metadata::query()->lazyById(column: 'id') as $metadatum) {
             $setting = $query->make()->forceFill([
@@ -142,6 +142,10 @@ class MorphManySettings extends MorphMany
         }
 
         $settings->cache = $this->cache;
+
+        $this->getParent()->setRelation('settings', new SettingsCollection(
+            $this->prepareCollection($settings)->all()
+        ));
     }
 
     /**
