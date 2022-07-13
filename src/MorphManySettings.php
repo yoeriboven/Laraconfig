@@ -198,6 +198,28 @@ class MorphManySettings extends MorphMany
     }
 
     /**
+     * Match the eagerly loaded results to their parents.
+     *
+     * @param  array   $models
+     * @param  \Illuminate\Database\Eloquent\Collection  $results
+     * @param  string  $relation
+     * @return array
+     */
+    public function match(array $models, EloquentCollection $results, $relation)
+    {
+        $models = parent::match($models, $results, $relation);
+
+        foreach ($models as $model) {
+            $model->setRelation('settings', new SettingsCollection(
+                $this->prepareCollection($model->settings)->all()
+            ));
+        }
+
+        return $models;
+    }
+
+
+    /**
      * Returns all the bags being used by the model.
      *
      * @return array
